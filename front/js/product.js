@@ -65,16 +65,7 @@ function ajout_data (){
             event.target.value = quantity;
         }
     });
-    //     const selected_size = format_select.value;
-    //     const selected_declinaison = data.declinaisons.find(declinaison => declinaison.taille === selected_size);
-    //     if (selected_declinaison) {
-    //         const total_price = selected_declinaison.prix * quantity;
-    //         prix_container.innerText = total_price.toFixed(2) + '€';
-    //     }
-    // 
-    
     document.querySelector('title').innerHTML = data.titre + ' - GeniArtHub';
 }
 
 get_datas();
-
