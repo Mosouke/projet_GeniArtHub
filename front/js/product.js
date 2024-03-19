@@ -1,4 +1,6 @@
-let data = {};
+let format_select;
+let quantity_input;
+let data;
 
 async function get_datas(){
     const url = window.location.href;
@@ -27,12 +29,17 @@ function ajout_data (){
     const premier_paragraphe = paragraphes[0];
     document.querySelector('#short_desc').innerText = premier_paragraphe;
     
-    document.querySelector('.button-buy').innerText = `Buy ${data.shorttitle}`;
+    const button_buy = document.querySelector('.button-buy');
+    button_buy.innerText = `Buy ${data.shorttitle}`;
 
+    button_buy.addEventListener('click', function(event) {
+        ajout_panier(event);
+        event.preventDefault();
+    });
     
     const prix_container = document.querySelector('.price .showprice');
 
-    const format_select = document.getElementById('format');
+    format_select = document.getElementById('format');
 
     data.declinaisons.forEach(declinaison => {
         const declinaison_element = document.createElement('option');
@@ -53,7 +60,7 @@ function ajout_data (){
         }
     });
 
-    const quantity_input = document.getElementById('quantity');
+    quantity_input = document.getElementById('quantity');
     quantity_input.addEventListener('input', (event) => {
         let quantity = parseInt(event.target.value);
 
@@ -67,5 +74,36 @@ function ajout_data (){
     });
     document.querySelector('title').innerHTML = data.titre + ' - GeniArtHub';
 }
+
+
+function ajout_panier () {
+    
+    let product = {
+        id: data._id,
+        image: data.image,
+        titre: data.titre,
+        // prix: prix_container.value,
+        taille: format_select.value,
+        quantite: quantity_input.value
+    };
+
+    if (parseInt(product.quantite) >= 100) {
+        alert("La quantité maximale autorisée est de 100.");
+        return;
+    }
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    let existing_product_index = cart.findIndex(item => item.id === product.id && item.taille === product.taille);
+
+    if (existing_product_index !== -1) {
+        cart[existing_product_index].quantite = Math.min(parseInt(cart[existing_product_index].quantite) + parseInt(product.quantite), 100);
+    } else {
+        cart.push(product);
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
+
 
 get_datas();

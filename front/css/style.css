@@ -330,7 +330,7 @@ h2 {
     height: 45px;
 }
 
-.img_2 {
+.img {
     max-width: 100%;
     width:7%;
 }
@@ -378,13 +378,13 @@ h2 {
 
 .form_input{
     display: flex;
-    flex-direction: column;
+    flex-direction: column;   
 }
 
 #form > input[type=submit]{
     grid-column: 1 / 3;
     margin: 20px auto;
-    padding: 4px 60px;
+    padding: 10px 60px;
     font-family: 'Source Sans 3', sans-serif;
     border: 1px solid #EE7F43;
     background: #EE7F43;
@@ -395,6 +395,11 @@ h2 {
 }
 
 #form label{
+    font-size: 28px;
+    font-family: 'Source Sans 3', sans-serif;
+}
+
+#form input{
     font-size: 28px;
     font-family: 'Source Sans 3', sans-serif;
 }
