@@ -82,7 +82,6 @@ function ajout_panier () {
         id: data._id,
         image: data.image,
         titre: data.titre,
-        // prix: prix_container.value,
         taille: format_select.value,
         quantite: quantity_input.value
     };
