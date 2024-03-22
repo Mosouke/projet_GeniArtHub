@@ -316,6 +316,15 @@ h2 {
     
 }
 
+.para_vide{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    font-family: 'Source Sans 3', sans-serif;
+    padding: 50px 0px ;
+}
+
 .fonte{
     font-family: 'Rum Raisin', sans-serif ;
     font-size: 32px;
@@ -357,7 +366,9 @@ h2 {
     margin: auto;
     text-align: center;
     display: flex;
+  
 }
+
 
 .div_commande{
     margin-right: 135px;
@@ -402,4 +413,24 @@ h2 {
 #form input{
     font-size: 28px;
     font-family: 'Source Sans 3', sans-serif;
+}
+
+#cart_icon{
+    text-decoration: none;
+
+}
+
+#cart_icon span{
+    background-color: #EE7F43bd;
+    color: #FFF;
+    padding: 8px;
+    font-size: 130%;
+    border-radius: 100%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: -30px;
+    left: -30px;
 }

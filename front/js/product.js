@@ -103,6 +103,7 @@ function ajout_panier () {
     }
 
     localStorage.setItem('cart', JSON.stringify(cart));
+    number_item()
 }
 
 
