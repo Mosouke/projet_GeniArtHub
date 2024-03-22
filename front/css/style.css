@@ -290,6 +290,8 @@ article > div > div.price > p {
 .container p{
     font-size: 26px;
     font-family: 'Souce sans 3', sans-serif;
+    
+    
 }
 
 
@@ -344,10 +346,6 @@ h2 {
     width:7%;
 }
 
-.Sup {
-    text-decoration: underline;
-    cursor: pointer;
-}
 
 .total {
     text-align: end;
@@ -433,4 +431,11 @@ h2 {
     position: absolute;
     top: -30px;
     left: -30px;
+}
+
+.container .sup {
+    font-size: 26px;
+    font-family: 'Souce sans 3', sans-serif;
+    cursor: pointer;
+    color: red;
 }

@@ -1,12 +1,10 @@
 const cartContainer = document.querySelector('.container');
 const itemsContainer = document.querySelector('.ligne');
 const totalElement = document.querySelector('.total');
-
 const cart = JSON.parse(localStorage.getItem('cart')) || [];
 async function get_datas() {
     await peuplee_data(cart);
 }
-
 async function fetch_product_details(product_id) {
     try {
         const response = await fetch(`http://localhost:3000/api/products/${product_id}`);
@@ -20,7 +18,6 @@ async function fetch_product_details(product_id) {
         return null;
     }
 }
-
 async function peuplee_data(cart) {
     let total_articles = 0;
     let total_montant = 0;
@@ -68,7 +65,6 @@ async function peuplee_data(cart) {
     setup_event_listeners();
     
 }
-
 function update_quantity(event) {
     const index = parseInt(event.target.dataset.index);
     const new_quantity = parseInt(event.target.value);
@@ -100,7 +96,6 @@ async function update_total() {
     if(cart.length === 0){
         itemsContainer.innerHTML =  '<p>votre panier est vide veuillez ajouter au moins un article à votre panier</p>'
     }
-
     for (const product of cart) {
         const product_details = await fetch_product_details(product.id);
         if (!product_details) {
@@ -119,7 +114,6 @@ async function update_total() {
         total_articles += quantite;
         total_montant += prix * quantite;
     }
-
     const totalContent = `${total_articles} ${total_articles === 1 ? 'article' : 'articles'} pour un montant de ${total_montant.toFixed(2)}€`;
     totalElement.innerHTML = `<h3 class="fonte">total de la commande</h3><p id="total-content">${totalContent}</p>`;
     number_item();
@@ -131,8 +125,7 @@ function setup_event_listeners() {
         input.addEventListener('change', update_quantity);
         input.addEventListener('input', enforce_quantity_limits);
         
-    });
-    
+    });    
     cartContainer.addEventListener('click', async (event) => {
         if (event.target.classList.contains('sup')) {
             const index = parseInt(event.target.closest('.item').querySelector('.quantity-input').dataset.index);
@@ -146,4 +139,38 @@ function setup_event_listeners() {
         }
     });
 }
+function valider_formulaire() {
+    let prenom = document.querySelector('#form input[type="text"][id="first_name"]').value;
+    let nom = document.querySelector('#form input[type="text"][id="name"]').value;
+    let adresse = document.querySelector('#form input[type="text"][id="Adresse"]').value;
+    let ville = document.querySelector('#form input[type="text"][id="Ville"]').value;
+    let email = document.querySelector('#form input[type="email"][id="mail"]').value;
+
+    let regexLettres = /^[a-zA-Z]+$/;
+    let regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (prenom.length < 2 || !regexLettres.test(prenom)) {
+        alert('Le prénom doit contenir au moins 2 lettres et ne doit pas contenir de caractères spéciaux.');
+        return false;
+    }
+    if (nom.length < 2 || !regexLettres.test(nom)) {
+        alert('Le nom doit contenir au moins 2 lettres et ne doit pas contenir de caractères spéciaux.');
+        return false;
+    }
+    if (adresse.length < 10) {
+        alert('L\'adresse doit contenir au moins 10 caractères.');
+        return false;
+    }
+    if (ville.length < 3 || !regexLettres.test(ville)) {
+        alert('La ville doit contenir au moins 3 lettres et ne doit pas contenir de chiffres.');
+        return false;
+    }
+    if (!regexEmail.test(email)) {
+        alert('Veuillez entrer une adresse email valide.');
+        return false;
+    }
+    return true;
+}
+
+
 get_datas();
